@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #d1c4e9, #b2dfdb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    h2 {
+      text-align: center;
+      color: #4527a0;
+      margin-bottom: 30px;
+      font-size: 26px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    th, td {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 15px;
+    }
+    th {
+      background-color: #ede7f6;
+      color: #311b92;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) {
+      background-color: #f3f4f6;
+    }
+    tr:hover {
+      background-color: #f0f4ff;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      text-decoration: none;
+      background-color: #5e35b1;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 16px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    a:hover {
+      background-color: #4527a0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Reservations List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Reservation ID</th>
+        <th>Customer Name</th>
+        <th>Ticket Number</th>
+        <th>Departure Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.id}"></td>
+        <td th:text="${reservation.details}"></td>
+        <td th:text="${reservation.ticketnumber}"></td>
+        <td th:text="${T(java.time.format.DateTimeFormatter).ofPattern('yyyy-MM-dd HH:mm').format(reservation.date)}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="/reservations/form">Back To Form</a>
+</div>
+</body>
+</html>
